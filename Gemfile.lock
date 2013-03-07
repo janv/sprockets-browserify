@@ -1,0 +1,24 @@
+PATH
+  remote: .
+  specs:
+    sprockets-browserify (0.0.1)
+      sprockets (~> 2.1)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    hike (1.2.1)
+    multi_json (1.6.1)
+    rack (1.4.5)
+    sprockets (2.2.2)
+      hike (~> 1.2)
+      multi_json (~> 1.0)
+      rack (~> 1.0)
+      tilt (~> 1.1, != 1.3.0)
+    tilt (1.3.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  sprockets-browserify!

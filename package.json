@@ -1,0 +1,11 @@
+{
+  "name": "sprockets_browserify",
+  "version": "0.0.1",
+  "description": "Browserify support for Sprockets",
+  "dependencies": {
+    "browserify": "~1.18.0",
+    "module-deps": "~0.5.0",
+    "through": "~2.2.1",
+    "JSONStream": "~0.4.3"
+  }
+}

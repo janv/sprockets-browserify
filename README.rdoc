@@ -1,0 +1,43 @@
+= SprocketsBrowserify
+
+Serve CommonJS modules through Sprockets with the help of Browserify
+
+Add this to your Gemfile:
+
+gem 'sprockets-browserify'
+
+Place a CommonJS Module into you assets:
+
+/app/assets/javascript/foo
+  - index.js
+  - package.json
+  - node_modules/
+    - ...
+
+Require the module within your application.js
+
+//
+//= require foo/index
+//
+
+Done.
+
+Your node module should fulfil the following requirements:
+- The main file for the module must reside in the same directory as the package.json, in the root of the module
+- The main file should expose its API in some way to the browser environment, by setting propertes on window or sth. like that
+
+If you want to use a module that doesn't conform, consider creating a wrapper module in you assets directory that requires the module you actually want to use
+
+WARNING:
+
+By default, the asset pipeline in Rails precompiles every file with a .js extension.
+This is probably not what you want if you have a bunch of modules in the node_modules directory.
+Disable this behavior by specifically listing only individual files you want to precompile:
+
+config.assets.precompile = ['main.js', 'stylesheet.css']
+
+instead of
+
+config.assets.precompile << 'main.js'
+
+This project rocks and uses MIT-LICENSE.
