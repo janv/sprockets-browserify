@@ -1,6 +1,12 @@
-= SprocketsBrowserify
+= Sprockets-Browserify
 
-Serve CommonJS modules through Sprockets with the help of Browserify
+Serve {npm}[https://npmjs.org/] (CommonJS) modules through {Sprockets}[https://github.com/sstephenson/sprockets] with the help of {Browserify}[https://github.com/substack/node-browserify].
+
+== Requirements
+
+{Node.js}[http://nodejs.org], obviously. This gem calls node directly, no {ExecJS}[https://github.com/sstephenson/execjs] involved.
+
+== How to use
 
 Add this to your Gemfile:
 
@@ -14,7 +20,7 @@ Place a CommonJS Module in your assets directory and perform a <tt>npm install</
     - node_modules/
       - ...
 
-Require the module within your <tt>application.js</tt>:
+Require the module within your <tt>application.js</tt> or somewhere else:
 
   //
   //= require foo/index
@@ -29,18 +35,36 @@ Your node module should fulfill the following requirements:
   environment, by setting propertes on <tt>window</tt> or sth. like that
 
 If you want to use a module that doesn't conform, consider creating a
-wrapper module in you assets directory that requires the module you actually want to use
+wrapper module in you assets directory that requires the module you actually want to use:
 
+<b>foo_wrapper/package.json:</b>
+
+  ...
+  "dependencies": {
+    "foo": ...
+  },
+  ...
+
+<b>foo_wrapper/index.js:</b>
+  
+  window.Foo = require('foo');
+
+<b>foo_wrapper/node_modules/foo/index.js:</b>
+
+  module.exports = "Foo";
+  
 == WARNING:
 
 By default, the asset pipeline in Rails precompiles every file with a <tt>.js</tt> extension.
-This is probably not what you want if you have a bunch of modules in the <tt>node_modules</tt> directory.
+This is probably <b>not what you want</b> if you have a bunch of modules in the <tt>node_modules</tt> directory.
 Disable this behavior by specifically listing only individual files you want to precompile:
 
   config.assets.precompile = ['main.js', 'stylesheet.css']
 
-instead of
+instead of merely appending to 
 
   config.assets.precompile << 'main.js'
 
-This project rocks and uses MIT-LICENSE.
+== License
+
+Released under the MIT License.  See the MIT-LICENSE file for further details.
