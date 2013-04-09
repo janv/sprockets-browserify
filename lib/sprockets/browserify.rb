@@ -30,7 +30,7 @@ module Sprockets
     end
 
     def browserify_executable
-      @browserify_executable ||= gem_dir + 'node_modules/.bin/browserify'
+      @browserify_executable ||= gem_dir + 'node_modules/browserify/bin/cmd.js'
     end
 
   end
