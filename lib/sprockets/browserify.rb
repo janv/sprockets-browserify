@@ -14,10 +14,14 @@ module Sprockets
 
     def evaluate(scope, locals, &block)
       if (scope.pathname.dirname+'package.json').exist?
-        deps = `NODE_PATH=#{Shellwords.shellescape((gem_dir+'node_modules').to_s)} node -e "mdeps=require('module-deps'),through=require('through');mdeps('#{scope.pathname}').pipe(through(function(d){ console.log(d.id); }))"`
-        deps.lines.reject{|line| line =~ /module-deps/}.drop(1).each{|path| scope.depend_on path.strip}
-        # TODO also throw an error if browserify fucks up
+        deps = `#{browserify_executable} --list #{scope.pathname}`
+        raise "Error finding dependencies" unless $?.success?
+
+        deps.lines.drop(1).each{|path| scope.depend_on path.strip}
+
         @output ||= `#{browserify_executable} -d #{scope.pathname}`
+        raise "Error compiling dependencies" unless $?.success?
+        @output
       else
         data
       end
