@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "sprockets-browserify"
-  s.version     = "0.2.0"
+  s.version     = "0.3.0"
   s.author      = "Jan Varwig"
   s.email       = "jan@varwig.org"
   s.homepage    = "http://jan.varwig.org"
