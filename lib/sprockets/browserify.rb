@@ -14,12 +14,12 @@ module Sprockets
 
     def evaluate(scope, locals, &block)
       if (scope.pathname.dirname+'package.json').exist?
-        deps = `#{browserify_executable} --list #{scope.pathname}`
+        deps = `#{browserify_executable} -t coffeeify --extension=".coffee" --list #{scope.pathname}`
         raise "Error finding dependencies" unless $?.success?
 
         deps.lines.drop(1).each{|path| scope.depend_on path.strip}
 
-        @output ||= `#{browserify_executable} -d #{scope.pathname}`
+        @output ||= `#{browserify_executable} -t coffeeify --extension=".coffee" -d #{scope.pathname}`
         raise "Error compiling dependencies" unless $?.success?
         @output
       else

@@ -3,6 +3,7 @@
   "version": "0.3.0",
   "description": "Browserify support for Sprockets",
   "dependencies": {
-    "browserify": "~3.24.1"
+    "browserify": "~3.24.1",
+    "coffeeify": "*"
   }
 }
